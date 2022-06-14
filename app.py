@@ -1,13 +1,11 @@
 from dotenv import load_dotenv
 import os
 
-from telegram.constants import ParseMode
-
 from core.application.services import calculate_mortgage_fee, format_amount
 import logging
 from typing import Dict
 
-from telegram import __version__ as TG_VER, Update
+from telegram import __version__ as TG_VER
 
 
 try:
@@ -28,7 +26,7 @@ from telegram.ext import (
     ContextTypes,
     ConversationHandler,
     MessageHandler,
-    filters, CallbackContext,
+    filters
 )
 
 load_dotenv()
