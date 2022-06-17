@@ -1,4 +1,6 @@
-from core.application.services import CreateLoanRequest
+import uuid
+
+from core.application.dtos import CreateLoanCommand
 
 
 def validate_user_data(user_data):
@@ -11,9 +13,12 @@ def parse_user_data(user_data, chat_id):
     else:
         term = int(int(user_data['Meses']) / 12)
 
-    return CreateLoanRequest(capital_as_str=user_data["Capital"],
+    loan_id = str(uuid.uuid4())
+
+    return CreateLoanCommand(owner_id=chat_id,
+                             loan_id=loan_id,
+                             capital_as_str=user_data["Capital"],
                              rate_as_str=user_data["TAE"],
                              term=term,
                              max_periods=user_data.get("Cuantos meses mostrar? (por defecto 12)", None),
-                             partial_amortizations=user_data.get("Amortizaciones Parciales", None),
-                             image_path=f'/tmp/{chat_id}.png')
+                             partial_amortizations=user_data.get("Amortizaciones Parciales", None))

@@ -1,20 +1,20 @@
 import typer
 
-from app import bot_start
+from apps.telegram_bot.app import bot_start as telegram_bot_start
 
 app = typer.Typer()
 
 
 @app.command()
-def start(watch: bool = typer.Option(False, help="Watch mode enabled"),):
+def start_telegram_bot(watch: bool = typer.Option(False, help="Watch mode enabled"),):
     if watch:
         devModeTag = "DEV MODE"
     else:
         devModeTag = ""
 
-    typer.echo(f"Bot running...{devModeTag}")
+    typer.echo(f"Telegram Bot running...{devModeTag}")
 
-    bot_start()
+    telegram_bot_start()
 
 
 if __name__ == "__main__":
